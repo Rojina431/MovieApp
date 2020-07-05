@@ -1,0 +1,3 @@
+{
+    "mongoURI":"mongodb+srv://Rojinab:rockana431@tmcluster-ozlmr.mongodb.net/moviedata?retryWrites=true&w=majority"
+}
