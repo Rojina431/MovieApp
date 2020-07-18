@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
-import Movies from './Reducer/movieFetch';
+import Errors from './errorReducer';
+import Users from './authReducer';
 
- const rootReducer=combineReducers({
-     movies:Movies
- })
+const rootReducer=combineReducers({
+    error:Errors,
+    users:Users
+})
 
- export default rootReducer;
+export default rootReducer;

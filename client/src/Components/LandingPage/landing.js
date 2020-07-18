@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { API_URL, API_KEY, IMG_URL } from '../../config/api'
-import { Col,Button, Row } from 'reactstrap';
+import { Button, Row } from 'reactstrap';
 import MainImage from './mainImage';
-import GridImage from './cardImage'
+import GridImage from './cardImage';
+import Search from './searchComponent'
 
 
 function LandingPage() {
@@ -31,9 +32,23 @@ function LandingPage() {
         fetchMovies(endpoint);
     }
 
+    const search=searchValue=>{
+        fetch(`${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchValue}`)
+        .then(response=>response.json())
+        .then(jsonResponse=>{
+            console.log(jsonResponse)
+            setMovies(jsonResponse.results)
+            setCurrentPage(jsonResponse.page)
+        })
+    }
+
     return (
         <div style={{ width: '100%', margin: 0 }}  >
 
+        {/*Search Component*/}
+             <div>
+                 <Search search={search}/>
+             </div>
 
             {/* Movie Main Image  */}
             {Movies[0] &&

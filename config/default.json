@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://Rojina:rockana431@tmcluster-ozlmr.mongodb.net/db?retryWrites=true&w=majority",
+    "jwtSecret": "rojina_baral"
+}
