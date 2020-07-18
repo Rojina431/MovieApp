@@ -1,11 +1,11 @@
 import React,{Component,Fragment} from 'react';
-import {NavbarToggler,Collapse,Navbar,Nav,NavItem,NavbarBrand,FormGroup,Input} from 'reactstrap';
+import {NavbarToggler,Collapse,Navbar,Nav,NavItem,NavbarBrand} from 'reactstrap';
 import RegisterModal from './registerModal';
 import LoginModal from './loginModal';
 import Logout from './logout';
 import {connect} from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faVideo,faSearch} from '@fortawesome/free-solid-svg-icons';
+import { faVideo} from '@fortawesome/free-solid-svg-icons';
 /// ...
 
 export class AppNavbar extends Component{
@@ -48,7 +48,7 @@ export class AppNavbar extends Component{
         return(
              <div>
             
-               <Navbar style={{color:"white"}} light expand='sm'> 
+               <Navbar color="dark" dark expand='sm' > 
                 <NavbarBrand href="/"><span><FontAwesomeIcon icon={faVideo} className="mr-2"/></span> Movie App</NavbarBrand>
                 <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>

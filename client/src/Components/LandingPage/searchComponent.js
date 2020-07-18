@@ -24,13 +24,14 @@ export default function Search(props){
     return(
         <Form className="m-1 search" >
         <Row>
-          <div className="col-sm-8 m">
+          <div className="col-sm-11">
            <Input type="text"  placeholder="Search Movie" 
+          
            onChange={handleChange}
            value={search}
            />
            </div>
-          <div className="col-sm-4">
+           <div className="col-sm-1">
            <Button onClick={callSearchFunction} type="submit"><FontAwesomeIcon icon={faSearch}/></Button>
            </div>
         </Row>

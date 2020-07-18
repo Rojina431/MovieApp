@@ -36,10 +36,13 @@ function LandingPage() {
         fetch(`${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchValue}`)
         .then(response=>response.json())
         .then(jsonResponse=>{
+            if(jsonResponse){
             console.log(jsonResponse)
             setMovies(jsonResponse.results)
             setCurrentPage(jsonResponse.page)
+            }
         })
+        
     }
 
     return (
