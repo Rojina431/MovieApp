@@ -2,7 +2,7 @@ import * as ActionTypes from './actionTypes';
 
 const initialState={
     token:localStorage.getItem('token'),
-    isAuthenticated:false,
+    isAuthenticated:localStorage.getItem('token')?true:false,
     isLoading:false,
     user:null
 }
@@ -12,7 +12,6 @@ export default function(state=initialState,action){
             case ActionTypes.LOGIN_SUCCESS:
             case ActionTypes.REGISTER_SUCCESS:
                 console.log('logged in')
-                localStorage.setItem('token',action.payload.token)
                 return{
                     ...state,
                     ...action.payload,

@@ -39,6 +39,11 @@ export const login=({email,password})=>(dispatch)=>{
 
     axios.post('/api/auth',body,config)
     .then(res=>{
+      
+        localStorage.setItem('token',res.token);
+        console.log(localStorage)
+        localStorage.setItem('creds',
+        {"email":res.email,"password":res.password})
         dispatch({
             type:ActionTypes.LOGIN_SUCCESS,
             payload:res.data

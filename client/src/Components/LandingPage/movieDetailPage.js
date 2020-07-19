@@ -4,6 +4,8 @@ import {API_KEY,API_URL,IMG_URL} from '../../config/api';
 import {Table,Row } from 'reactstrap';
 import MainImage from './mainImage';
 import GridImage from './cardImage'
+import Favorite from './favorite';
+
 
 export default function MovieDetail(props){
 
@@ -51,6 +53,11 @@ export default function MovieDetail(props){
         }
         </div>
         <br/>
+
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }} className="mb-2">
+           <Favorite userFrom={localStorage.getItem('creds')} movieId={props.movieId} movieInfo={Movie} />
+        </div>
+
         {/*Movie info */}
         {Movie &&
             <Table className="mx-1" bordered>

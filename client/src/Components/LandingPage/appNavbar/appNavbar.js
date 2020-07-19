@@ -1,5 +1,5 @@
 import React,{Component,Fragment} from 'react';
-import {NavbarToggler,Collapse,Navbar,Nav,NavItem,NavbarBrand} from 'reactstrap';
+import {NavbarToggler,Collapse,Navbar,Nav,NavItem,NavbarBrand,Strong} from 'reactstrap';
 import RegisterModal from './registerModal';
 import LoginModal from './loginModal';
 import Logout from './logout';
@@ -20,14 +20,15 @@ export class AppNavbar extends Component{
     }
 
     render(){
-      const{isAuthenticated}=this.props.auth
+      const{isAuthenticated,user}=this.props.auth
 
         const authLinks=(
                 <Fragment>
-                  {/*<NavItem>
-                    <span className="navbar-text mr-3"/>
-                  {user&&   <Strong>{ user?`Welcome ${user.name}`:''}</Strong>}
-                  </NavItem>*/}
+                  <NavItem>
+                    <span className="navbar-text mr-3">
+                      <h4>Welcome</h4>
+                    </span>
+                  </NavItem>
                    <NavItem>
                      <Logout/>
                    </NavItem>
