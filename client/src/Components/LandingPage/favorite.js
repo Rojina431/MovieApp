@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, {Component, useEffect, useState } from 'react'
 import axios from 'axios';
-import {Button} from 'reactstrap'
+import {Button} from 'reactstrap';
+import {connect} from 'react-redux';
 
-export default function Favorite(props) {
+ function  Favorite(props) {
+    
+    const{isAuthenticated}=props.auth
 
     const [FavoriteNumber, setFavoriteNumber] = useState(0)
     const [Favorited, setFavorited] = useState(false)
@@ -10,15 +13,12 @@ export default function Favorite(props) {
     const variable = {
        
         movieId: props.movieId,
-        movieTitle: props.movieInfo.original_title,
-        movieImage: props.movieInfo.backdrop_path,
-        movieRunTime: props.movieInfo.runtime
+        movieTitle:props.movieInfo.original_title,
+        movieImage:props.movieInfo.backdrop_path,
+        movieRunTime:props.movieInfo.runtime
     }
 
     useEffect(() => {
-
-
-
 
         axios.post('/api/favorite/favoriteNumber', variable)
             .then(response => {
@@ -45,7 +45,7 @@ export default function Favorite(props) {
         const onClickFavorite = () => {
             if(Favorited) {
                 // When already added 
-    
+               if(isAuthenticated){
                 axios.post('/api/favorite/removeFavorite', variable)
                 .then(response=> {
                     if(response.data.success) {
@@ -57,32 +57,47 @@ export default function Favorite(props) {
                 }).catch(err=>{
                     alert(err.msg +' Error arise')
                 })
-    
-    
+               }else{
+                   alert("Login to remove from favorite")
+               }
+                
     
             } else {
                 //When Not adding yet 
-            
-                axios.post('/api/favorite/addToFavorite', variable)
-                .then(response=> {
-                    if(response.data.success) {
-                        setFavoriteNumber(FavoriteNumber + 1)
-                        setFavorited(!Favorited)
-                    } else {
-                        alert(' Failed to add to Favorites')
-                    }
-                }).catch(err=>{
-                    alert(err.response)
-                })
+                if(isAuthenticated){
+                    axios.post('/api/favorite/addToFavorite', variable)
+                    .then(response=> {
+                        if(response.data.success) {
+                            setFavoriteNumber(FavoriteNumber + 1)
+                            setFavorited(!Favorited)
+                        } else {
+                            alert(' Failed to add to Favorites')
+                        }
+                    }).catch(err=>{
+                        alert(err.response)
+                    })
+                }else{
+                    alert('Login to add to favorite')
+                }
+              
             
             }
         }
+              
+        
     
     
         return (
             <div>
                 <Button onClick={onClickFavorite} >{Favorited ? " remove from Favorite " : " Add to Favorite "}{FavoriteNumber}</Button>
-    
             </div>
         )
+    
 }
+
+const mapStateToProps=state=>({
+    auth:state.users
+})
+
+
+export default connect(mapStateToProps)(Favorite)

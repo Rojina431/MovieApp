@@ -11,6 +11,7 @@ export default function(state=initialState,action){
     switch(action.type){
             case ActionTypes.LOGIN_SUCCESS:
             case ActionTypes.REGISTER_SUCCESS:
+
                 console.log('logged in')
                 return{
                     ...state,

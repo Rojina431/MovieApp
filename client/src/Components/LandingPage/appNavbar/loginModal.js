@@ -22,7 +22,8 @@ class LoginModal extends Component {
     modal: false,
     email: "",
     password: "",
-    msg: null
+    msg: null,
+   
   };
 
   static propTypes = {
@@ -38,17 +39,18 @@ class LoginModal extends Component {
     if(error !== prevProps.error) {
         // Check for register error
         if(error.id=='LOGIN_FAIL'){
-          console.log(isAuthenticated)
+          
           this.setState({msg: error.msg.msg })
         } else {
-            this.setState({ msg: null })
+          
+            this.setState({ msg: null ,isAuthenticated:true})
         }
     }
     // If authenticated, close Modal
     if (this.state.modal) {
         if (isAuthenticated) {
             this.toggle();
-            console.log(isAuthenticated)
+            
         }
     }
   }
@@ -62,13 +64,13 @@ class LoginModal extends Component {
   };
 
   onChange = e => {
-    console.log(this)
+    
     this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = e => {
     e.preventDefault();
-
+    
     const {  email, password } = this.state;
 
     // Create user object
@@ -80,7 +82,7 @@ class LoginModal extends Component {
     // Attempt to register
     this.props.login(User)
     
-  
+   
 
   };
 

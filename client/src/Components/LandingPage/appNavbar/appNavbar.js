@@ -1,5 +1,5 @@
 import React,{Component,Fragment} from 'react';
-import {NavbarToggler,Collapse,Navbar,Nav,NavItem,NavbarBrand,Strong} from 'reactstrap';
+import {NavbarToggler,Collapse,Navbar,Nav,NavItem,NavbarBrand} from 'reactstrap';
 import RegisterModal from './registerModal';
 import LoginModal from './loginModal';
 import Logout from './logout';
