@@ -5,6 +5,7 @@ import MovieDetail from './Components/LandingPage/movieDetailPage';
 import AppNavbar from './Components/LandingPage/appNavbar/appNavbar';
 import {Provider} from 'react-redux';
 import store from './store';
+import Favorites from './Components/LandingPage/appNavbar/FavoritePage'
 
 
 const MovieWithId=({match})=>{
@@ -31,6 +32,7 @@ render(){
       <Switch> 
         <Route exact path='/' component={()=><Landingpage/>}/>
         <Route exact path='/movie/:movieId' component={MovieWithId}/>   
+        <Route  path='/favorites' component={()=><Favorites/>}/>
       </Switch> 
     </BrowserRouter>
     </div>  

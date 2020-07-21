@@ -5,9 +5,10 @@ import {Table,Row } from 'reactstrap';
 import MainImage from './mainImage';
 import GridImage from './cardImage'
 import Favorite from './favorite';
+import {connect} from 'react-redux';
 
 
-export default function MovieDetail(props){
+ function MovieDetail(props){
 
     const [Movie,setMovie]=useState([]);
     const [Crews,setCrews]=useState([]);
@@ -55,7 +56,7 @@ export default function MovieDetail(props){
         <br/>
 
         <div style={{ display: 'flex', justifyContent: 'flex-end' }} className="mb-2">
-           <Favorite userFrom={localStorage.getItem('creds')} movieId={props.movieId} movieInfo={Movie} />
+           <Favorite userFrom={localStorage.getItem('creds') } movieId={props.movieId} movieInfo={Movie} />
         </div>
 
         {/*Movie info */}
@@ -107,3 +108,7 @@ export default function MovieDetail(props){
     }
  </React.Fragment>
     )}
+
+  
+
+    export default (MovieDetail)

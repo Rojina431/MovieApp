@@ -14,7 +14,9 @@ export const register=({name,email,password})=>(dispatch)=>{
 
     axios.post('/api/users',body,config)
     .then(res=>{
-       
+        localStorage.setItem('token',JSON.stringify(res.data.token));
+        localStorage.setItem('creds',body)
+        console.log(localStorage)
         dispatch({
         type:ActionTypes.REGISTER_SUCCESS,
         payload:res.data
@@ -40,10 +42,9 @@ export const login=({email,password})=>(dispatch)=>{
     axios.post('/api/auth',body,config)
     .then(res=>{
       
-        localStorage.setItem('token',res.token);
+        localStorage.setItem('token',JSON.stringify(res.data.token));
+        localStorage.setItem('creds',body)
         console.log(localStorage)
-        localStorage.setItem('creds',
-        {"email":res.email,"password":res.password})
         dispatch({
             type:ActionTypes.LOGIN_SUCCESS,
             payload:res.data

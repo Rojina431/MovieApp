@@ -23,6 +23,8 @@ export default function(state=initialState,action){
             case ActionTypes.REGISTER_FAILED:
             case ActionTypes.LOGOUT_SUCCESS:
                 localStorage.removeItem('token')
+                localStorage.removeItem('creds')
+                localStorage.removeItem('user')
                 return{
                     token:null,
                     isAuthenticated:false,

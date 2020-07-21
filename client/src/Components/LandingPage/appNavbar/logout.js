@@ -10,8 +10,8 @@ class Logout extends Component{
         
         return(
             <Fragment>
-              <NavLink onClick={this.props.logout} href="#">
-              Logout</NavLink>
+              <NavLink onClick={this.props.logout} href="#" style={{color:'white'}} >
+              <span className="fa fa-sign-out fa-lg"></span> Logout</NavLink>
             </Fragment>
             
         )

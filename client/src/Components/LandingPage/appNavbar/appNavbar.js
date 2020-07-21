@@ -1,11 +1,12 @@
 import React,{Component,Fragment} from 'react';
-import {NavbarToggler,Collapse,Navbar,Nav,NavItem,NavbarBrand} from 'reactstrap';
+import {NavbarToggler,Collapse,Navbar,Nav,NavItem,NavbarBrand,NavLink} from 'reactstrap';
 import RegisterModal from './registerModal';
 import LoginModal from './loginModal';
 import Logout from './logout';
 import {connect} from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faVideo} from '@fortawesome/free-solid-svg-icons';
+import { faVideo,faFilm} from '@fortawesome/free-solid-svg-icons';
+
 /// ...
 
 export class AppNavbar extends Component{
@@ -20,7 +21,7 @@ export class AppNavbar extends Component{
     }
 
     render(){
-      const{isAuthenticated,user}=this.props.auth
+      const{isAuthenticated}=this.props.auth
 
         const authLinks=(
                 <Fragment>
@@ -53,7 +54,14 @@ export class AppNavbar extends Component{
                 <NavbarBrand href="/"><span><FontAwesomeIcon icon={faVideo} className="mr-2"/></span> Movie App</NavbarBrand>
                 <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
-                     <Nav className="ml-auto" navbar>
+                     <Nav className="mr-auto " navbar>
+                  <NavItem>
+                     <NavLink className="nav-link" key="favorites">
+                        <a href='/favorites' style={{color:'white'}} className=" m-4"className="mr-auto mt-2"> <span className="fa fa-heart fa-lg"></span> My Favorites</a>
+                     </NavLink>
+                 </NavItem>
+                     </Nav>
+                     <Nav className="ml-auto mt-2" navbar>
                        {isAuthenticated ? authLinks:guestLinks}
                      </Nav>
                     </Collapse>

@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
     const [Favorited, setFavorited] = useState(false)
 
     const variable = {
-       
+        //userFrom:props.userFrom,
         movieId: props.movieId,
         movieTitle:props.movieInfo.original_title,
         movieImage:props.movieInfo.backdrop_path,
@@ -48,6 +48,7 @@ import {connect} from 'react-redux';
                if(isAuthenticated){
                 axios.post('/api/favorite/removeFavorite', variable)
                 .then(response=> {
+                   
                     if(response.data.success) {
                         setFavoriteNumber(FavoriteNumber - 1 )
                         setFavorited(!Favorited)
@@ -67,6 +68,7 @@ import {connect} from 'react-redux';
                 if(isAuthenticated){
                     axios.post('/api/favorite/addToFavorite', variable)
                     .then(response=> {
+                        console.log(props.userFrom)
                         if(response.data.success) {
                             setFavoriteNumber(FavoriteNumber + 1)
                             setFavorited(!Favorited)
