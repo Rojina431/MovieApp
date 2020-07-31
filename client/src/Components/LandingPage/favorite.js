@@ -1,105 +1,104 @@
-import React, {Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import {Button} from 'reactstrap';
-import {connect} from 'react-redux';
+import { Button } from 'antd';
+import {connect} from 'react-redux'
+ 
 
- function  Favorite(props) {
+function Favorite(props) {
     
-    const{isAuthenticated}=props.auth
+    const {isAuthenticated,user}=props.auth
+
+    const movieId = props.movieId
+    const userFrom = user
+    const movieTitle = props.movieInfo.title
+    const movieImage = props.movieInfo.backdrop_path
+    const movieRunTime = props.movieInfo.runtime
 
     const [FavoriteNumber, setFavoriteNumber] = useState(0)
     const [Favorited, setFavorited] = useState(false)
-
-    const variable = {
-        //userFrom:props.userFrom,
-        movieId: props.movieId,
-        movieTitle:props.movieInfo.original_title,
-        movieImage:props.movieInfo.backdrop_path,
-        movieRunTime:props.movieInfo.runtime
+    const variables = {
+        movieId: movieId,
+        userFrom: userFrom,
+        movieTitle: movieTitle,
+        movieImage: movieImage,
+        movieRunTime: movieRunTime
     }
 
     useEffect(() => {
 
-        axios.post('/api/favorite/favoriteNumber', variable)
+        axios.post('/api/favorite/favoriteNumber', variables)
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data.favoriteNumber)
                     setFavoriteNumber(response.data.favoriteNumber)
                 } else {
-                    alert('Failed to get favoriteNumber')
+                    alert('Failed to get Favorite Number')
                 }
             })
 
-            axios.post('/api/favorite/favorited', variable)
+        axios.post('/api/favorite/favorited', variables)
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data.favorited)
                     setFavorited(response.data.favorited)
                 } else {
-                    alert('Failed to get favoriteNumber')
+                    alert('Failed to get Favorite Information')
                 }
             })
-        },[])
 
+    }, [])
 
-        const onClickFavorite = () => {
-            if(Favorited) {
-                // When already added 
-               if(isAuthenticated){
-                axios.post('/api/favorite/removeFavorite', variable)
-                .then(response=> {
-                   
-                    if(response.data.success) {
-                        setFavoriteNumber(FavoriteNumber - 1 )
+    const onClickFavorite = () => {
+
+        if (Favorited) {
+            //when we are already subscribed 
+            if(isAuthenticated){
+            axios.post('/api/favorite/removeFavorite', variables)
+                .then(response => {
+                    if (response.data.success) {
+                        setFavoriteNumber(FavoriteNumber - 1)
                         setFavorited(!Favorited)
                     } else {
-                        alert(' Failed to remove from favorite')
+                        alert('Failed to Remove From Favorite')
                     }
                 }).catch(err=>{
-                    alert(err.msg +' Error arise')
+                    alert(err.msg)
                 })
-               }else{
-                   alert("Login to remove from favorite")
-               }
-                
-    
-            } else {
-                //When Not adding yet 
-                if(isAuthenticated){
-                    axios.post('/api/favorite/addToFavorite', variable)
-                    .then(response=> {
-                        console.log(props.userFrom)
-                        if(response.data.success) {
-                            setFavoriteNumber(FavoriteNumber + 1)
-                            setFavorited(!Favorited)
-                        } else {
-                            alert(' Failed to add to Favorites')
-                        }
-                    }).catch(err=>{
-                        alert(err.response)
-                    })
-                }else{
-                    alert('Login to add to favorite')
-                }
-              
-            
+            }else{
+                alert('Please login to add remove from favorite')
             }
+        } else {
+            // when we are not subscribed yet
+         if(isAuthenticated){
+            axios.post('/api/favorite/addToFavorite', variables)
+            .then(response => {
+                if (response.data.success) {
+                    setFavoriteNumber(FavoriteNumber + 1)
+                    setFavorited(!Favorited)
+                } else {
+                    alert('Failed to Add To Favorite')
+                }
+            }).catch(err=>{
+                alert(err.msg)
+            })
+            
+         }else{
+             alert('Please login to add to favorite')
+         }
+           
         }
-              
+    }
+
+
+
+
+    return (
         
-    
-    
-        return (
-            <div>
-                <Button onClick={onClickFavorite} >{Favorited ? " remove from Favorite " : " Add to Favorite "}{FavoriteNumber}</Button>
-            </div>
-        )
-    
+            <Button onClick={onClickFavorite} > {!Favorited ? "Add to Favorite" : "Remove from Favorite"} {FavoriteNumber}</Button>
+       
+    )
 }
 
 const mapStateToProps=state=>({
     auth:state.users
 })
-
 
 export default connect(mapStateToProps)(Favorite)

@@ -1,10 +1,12 @@
-import React ,{useEffect,useState}from 'react';
-import { Input ,Form, Button,Col,Row} from 'reactstrap';
+import React ,{useState}from 'react';
+import { Input ,Form, Button,Row} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch} from '@fortawesome/free-solid-svg-icons';
+import {connect} from 'react-redux'
 
-export default function Search(props){
+ function Search(props){
 
+    const{isAuthenticated}=props
     const [search,setSearch]=useState('')
 
     const handleChange=(e)=>{
@@ -21,8 +23,10 @@ export default function Search(props){
       resetInputField();
     }
    
-    return(
-        <Form className="m-1 search" >
+    if(isAuthenticated)
+        {
+            return(
+                <Form className="m-1 search" >
         <Row>
           <div className="col-sm-11">
            <Input type="text"  placeholder="Search Movie" 
@@ -36,5 +40,19 @@ export default function Search(props){
            </div>
         </Row>
         </Form>
-    )
+            )
+        }
+   else{
+       return(
+           <div className="container my-1" >
+               <h4 style={{textAlign:"center" ,color:"Tan"}}>Login to search movie by name</h4>
+           </div>
+       )
+   }
 }
+
+const mapStateToProps=state=>({
+    isAuthenticated:state.users.isAuthenticated
+})
+
+export default connect(mapStateToProps)(Search)

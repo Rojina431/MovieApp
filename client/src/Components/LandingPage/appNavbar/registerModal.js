@@ -38,7 +38,7 @@ class RegisterModal extends Component {
     const {error, isAuthenticated} = this.props;
     if(error !== prevProps.error) {
         // Check for register error
-        if(error.id=='REGISTER_FAIL'){
+        if(error.id==='REGISTER_FAIL'){
           console.log(isAuthenticated)
           this.setState({msg: error.msg.msg })
         } else {

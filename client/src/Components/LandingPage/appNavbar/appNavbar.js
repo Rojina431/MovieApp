@@ -5,7 +5,7 @@ import LoginModal from './loginModal';
 import Logout from './logout';
 import {connect} from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faVideo,faFilm} from '@fortawesome/free-solid-svg-icons';
+import { faVideo} from '@fortawesome/free-solid-svg-icons';
 
 /// ...
 
@@ -27,7 +27,7 @@ export class AppNavbar extends Component{
                 <Fragment>
                   <NavItem>
                     <span className="navbar-text mr-3">
-                      <h4>Welcome</h4>
+                    { <h4>{'Welcome'}</h4> }  
                     </span>
                   </NavItem>
                    <NavItem>
@@ -55,10 +55,10 @@ export class AppNavbar extends Component{
                 <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
                      <Nav className="mr-auto " navbar>
-                  <NavItem>
+                 <NavItem>
                      <NavLink className="nav-link" key="favorites">
                         <a href='/favorites' style={{color:'white'}} className=" m-4"className="mr-auto mt-2"> <span className="fa fa-heart fa-lg"></span> My Favorites</a>
-                     </NavLink>
+                 </NavLink>
                  </NavItem>
                      </Nav>
                      <Nav className="ml-auto mt-2" navbar>

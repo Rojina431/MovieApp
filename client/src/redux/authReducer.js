@@ -9,13 +9,21 @@ const initialState={
 
 export default function(state=initialState,action){
     switch(action.type){
+       /* case ActionTypes.USER_LOADED:
+            return{
+                ...state,
+                isAuthenticated:true,
+                isLoading:false,
+                user:action.payload
+            }*/
             case ActionTypes.LOGIN_SUCCESS:
             case ActionTypes.REGISTER_SUCCESS:
-
                 console.log('logged in')
                 return{
                     ...state,
-                    ...action.payload,
+                   ...action.payload,
+                   // token:action.payload.token,
+                   // user:action.payload.user,
                     isAuthenticated:true,
                     isLoading:false,
                 }  

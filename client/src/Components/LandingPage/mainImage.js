@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card,CardImg,CardImgOverlay,CardBody,CardText,CardTitle} from 'reactstrap';
+import {Card,CardImg,CardImgOverlay,CardText,CardTitle} from 'reactstrap';
 
 export default function MainImage(props){
     return(

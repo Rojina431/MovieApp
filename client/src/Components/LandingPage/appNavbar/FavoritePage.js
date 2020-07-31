@@ -6,9 +6,10 @@ import {Table} from 'reactstrap';
 
 
 
+
 function FavoritePage() {
 
-    const variables = { userFrom: localStorage.getItem('userId') }
+   // const variables = { userFrom: JSON.parse(localStorage.getItem('creds')) }
 
     const [FavoritedMovies, setFavoritedMovies] = useState([])
 
@@ -20,9 +21,11 @@ function FavoritePage() {
     }, [])
 
     const fetchFavoritedMovies = () => {
-        Axios.post('/api/favorite/getFavoritedMovie', variables)
+        Axios.post('/api/favorite/getFavoritedMovie')
         .then(response => {
             if (response.data.success) {
+                localStorage.getItem('creds')
+                localStorage.getItem('userId')
                 setFavoritedMovies(response.data.favorites)
             } else {
                 alert('Failed to get favorited videos')
@@ -37,13 +40,13 @@ function FavoritePage() {
         
         const variable = {
             movieId: movieId,
-            userFrom:  localStorage.getItem('userId')
+            //userFrom: localStorage.getItem('creds')
         }
 
         Axios.post('/api/favorite/removeFavorite', variable)
         .then(response=> {
             if(response.data.success) {
-               
+                localStorage.getItem('creds')
                 fetchFavoritedMovies();
 
             } else {
@@ -104,5 +107,6 @@ function FavoritePage() {
         </div>
     )
 }
+
 
 export default FavoritePage

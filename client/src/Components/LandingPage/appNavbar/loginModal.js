@@ -17,6 +17,8 @@ import { login } from '../../../redux/authAction'
 import { clearErrors } from '../../../redux/errorAction'
 
 
+
+
 class LoginModal extends Component {
   state = {
     modal: false,
@@ -38,7 +40,7 @@ class LoginModal extends Component {
     const {error, isAuthenticated} = this.props;
     if(error !== prevProps.error) {
         // Check for register error
-        if(error.id=='LOGIN_FAIL'){
+        if(error.id==='LOGIN_FAIL'){
           
           this.setState({msg: error.msg.msg })
         } else {
@@ -82,7 +84,7 @@ class LoginModal extends Component {
     // Attempt to register
     this.props.login(User)
     
-   
+  
 
   };
 

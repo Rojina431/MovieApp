@@ -1,11 +1,12 @@
 import React, { useState ,useEffect} from 'react';
-import {Button,Fragment} from 'reactstrap';
+import {Button} from 'reactstrap';
 import {API_KEY,API_URL,IMG_URL} from '../../config/api';
 import {Table,Row } from 'reactstrap';
 import MainImage from './mainImage';
 import GridImage from './cardImage'
-import Favorite from './favorite';
-import {connect} from 'react-redux';
+import Favorite from './favorite.js';
+//import {connect} from 'react-redux'
+
 
 
  function MovieDetail(props){
@@ -55,9 +56,9 @@ import {connect} from 'react-redux';
         </div>
         <br/>
 
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }} className="mb-2">
-           <Favorite userFrom={localStorage.getItem('creds') } movieId={props.movieId} movieInfo={Movie} />
-        </div>
+    <div style={{ display: 'flex', justifyContent: 'flex-end' }} className="mb-2">
+           <Favorite userFrom={localStorage.getItem('creds')} movieId={props.movieId} movieInfo={Movie} />
+    </div>
 
         {/*Movie info */}
         {Movie &&
@@ -109,6 +110,6 @@ import {connect} from 'react-redux';
  </React.Fragment>
     )}
 
-  
+
 
     export default (MovieDetail)

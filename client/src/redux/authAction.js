@@ -2,6 +2,28 @@ import * as ActionTypes from './actionTypes';
 import axios from 'axios';
 import { returnErrors } from './errorAction';
 
+//for user loading
+/*export const userLoaded=()=>(dispatch,getState)=>{
+    dispatch({type:ActionTypes.USER_LOADING})
+    axios.get('/auth/user',tokenConfig())
+    .then(res=>{
+      dispatch({
+        type:ActionTypes.USER_LOADED,
+        payload:res.data
+   })
+    }).catch(err=>{
+        if (err.response && err.response.data){
+        dispatch(returnErrors(err.response.data,err.response.status))
+        dispatch({
+            type:ActionTypes.AUTH_ERROR
+        })
+    }else{
+      console.log(err)
+    }
+    })  
+    
+}*/
+
 //for user register
 
 export const register=({name,email,password})=>(dispatch)=>{
@@ -15,7 +37,7 @@ export const register=({name,email,password})=>(dispatch)=>{
     axios.post('/api/users',body,config)
     .then(res=>{
         localStorage.setItem('token',JSON.stringify(res.data.token));
-        localStorage.setItem('creds',body)
+        localStorage.setItem('creds',JSON.stringify(res.data.user))
         console.log(localStorage)
         dispatch({
         type:ActionTypes.REGISTER_SUCCESS,
@@ -43,7 +65,7 @@ export const login=({email,password})=>(dispatch)=>{
     .then(res=>{
       
         localStorage.setItem('token',JSON.stringify(res.data.token));
-        localStorage.setItem('creds',body)
+        localStorage.setItem('creds',JSON.stringify(res.data.user))
         console.log(localStorage)
         dispatch({
             type:ActionTypes.LOGIN_SUCCESS,
@@ -68,3 +90,23 @@ export const logout=()=>{
         type:ActionTypes.LOGOUT_SUCCESS
     }
 }
+
+ //setup config/headers and token
+ export const tokenConfig = ()=> {
+    //get token from localstorage
+    const token = localStorage.getItem('token')
+
+    //console.log(token)
+    //headers
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    //if token, add to headers
+    if (token) {
+        config.headers['x-auth-token'] = token;
+    }
+    return config;
+};

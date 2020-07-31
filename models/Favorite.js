@@ -1,24 +1,26 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const favoriteSchema =new Schema({
+const favoriteSchema = mongoose.Schema({
     userFrom: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     movieId : {
-        type:String
+        type: String
     },
     movieTitle: {
-        type:String
+        type: String
     },
     movieImage: {
         type: String
     },
-    movieRunTime: {
-        type: String 
+    movieRunTime : {
+        type: String
     }
-})
+
+}, { timestamps: true })
+
 
 const Favorite = mongoose.model('Favorite', favoriteSchema);
 
