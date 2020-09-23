@@ -13,6 +13,7 @@
   "author": "Rojina",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.20.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
@@ -20,9 +21,19 @@
     "create-react-app": "^3.4.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.25"
+    "mongoose": "^5.10.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rojina431/movie_app_clone-mern-stack-.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Rojina431/movie_app_clone-mern-stack-/issues"
+  },
+  "homepage": "https://github.com/Rojina431/movie_app_clone-mern-stack-#readme"
 }

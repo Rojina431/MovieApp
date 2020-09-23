@@ -41,10 +41,8 @@ class LoginModal extends Component {
     if(error !== prevProps.error) {
         // Check for register error
         if(error.id==='LOGIN_FAIL'){
-          
           this.setState({msg: error.msg.msg })
         } else {
-          
             this.setState({ msg: null ,isAuthenticated:true})
         }
     }
@@ -66,15 +64,12 @@ class LoginModal extends Component {
   };
 
   onChange = e => {
-    
     this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = e => {
     e.preventDefault();
-    
     const {  email, password } = this.state;
-
     // Create user object
     const User = {
         email,
@@ -83,8 +78,6 @@ class LoginModal extends Component {
 
     // Attempt to register
     this.props.login(User)
-    
-  
 
   };
 

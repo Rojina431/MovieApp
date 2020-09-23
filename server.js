@@ -28,5 +28,7 @@ app.use('/api/users',userRouter);
 app.use('/api/auth',authRouter);
 app.use('/api/favorite',favoriteRouter);
 
+//db.collection.dropIndexes();
+
 app.use(express.static(path.join(__dirname, 'public')));
 module.exports = app;

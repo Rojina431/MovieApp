@@ -57,7 +57,7 @@ import Favorite from './favorite.js';
         <br/>
 
     <div style={{ display: 'flex', justifyContent: 'flex-end' }} className="mb-2">
-           <Favorite userFrom={localStorage.getItem('creds')} movieId={props.movieId} movieInfo={Movie} />
+           <Favorite userFrom={JSON.parse(localStorage.getItem('creds'))} movieId={props.movieId} movieInfo={Movie} />
     </div>
 
         {/*Movie info */}

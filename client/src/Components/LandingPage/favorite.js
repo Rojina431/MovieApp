@@ -5,11 +5,10 @@ import {connect} from 'react-redux'
  
 
 function Favorite(props) {
-    
-    const {isAuthenticated,user}=props.auth
+    const {isAuthenticated}=props.auth
 
     const movieId = props.movieId
-    const userFrom = user
+    const userFrom = props.userFrom
     const movieTitle = props.movieInfo.title
     const movieImage = props.movieInfo.backdrop_path
     const movieRunTime = props.movieInfo.runtime
@@ -23,7 +22,6 @@ function Favorite(props) {
         movieImage: movieImage,
         movieRunTime: movieRunTime
     }
-
     useEffect(() => {
 
         axios.post('/api/favorite/favoriteNumber', variables)
@@ -49,7 +47,7 @@ function Favorite(props) {
     const onClickFavorite = () => {
 
         if (Favorited) {
-            //when we are already subscribed 
+            //when we are already logged in
             if(isAuthenticated){
             axios.post('/api/favorite/removeFavorite', variables)
                 .then(response => {
@@ -66,7 +64,7 @@ function Favorite(props) {
                 alert('Please login to add remove from favorite')
             }
         } else {
-            // when we are not subscribed yet
+            // when we are not logged in yet
          if(isAuthenticated){
             axios.post('/api/favorite/addToFavorite', variables)
             .then(response => {
@@ -82,18 +80,12 @@ function Favorite(props) {
             
          }else{
              alert('Please login to add to favorite')
-         }
-           
+         }  
         }
     }
 
-
-
-
     return (
-        
             <Button onClick={onClickFavorite} > {!Favorited ? "Add to Favorite" : "Remove from Favorite"} {FavoriteNumber}</Button>
-       
     )
 }
 

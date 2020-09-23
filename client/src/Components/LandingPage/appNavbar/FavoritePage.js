@@ -5,11 +5,11 @@ import { IMG_URL } from '../../../config/api';
 import {Table} from 'reactstrap';
 
 
-
-
 function FavoritePage() {
 
-   // const variables = { userFrom: JSON.parse(localStorage.getItem('creds')) }
+    const variable = { 
+         userFrom:JSON.parse(localStorage.getItem('creds')) 
+    }
 
     const [FavoritedMovies, setFavoritedMovies] = useState([])
 
@@ -17,15 +17,12 @@ function FavoritePage() {
 
         fetchFavoritedMovies();
 
-
     }, [])
 
     const fetchFavoritedMovies = () => {
-        Axios.post('/api/favorite/getFavoritedMovie')
+        Axios.post('/api/favorite/getFavoritedMovie',variable)
         .then(response => {
             if (response.data.success) {
-                localStorage.getItem('creds')
-                localStorage.getItem('userId')
                 setFavoritedMovies(response.data.favorites)
             } else {
                 alert('Failed to get favorited videos')
@@ -33,17 +30,13 @@ function FavoritePage() {
         })
     }
 
-
-
-
     const onClickRemove = (movieId) => {
-        
-        const variable = {
+        const variables = {
             movieId: movieId,
-            //userFrom: localStorage.getItem('creds')
+            userFrom:JSON.parse(localStorage.getItem('creds')) 
         }
 
-        Axios.post('/api/favorite/removeFavorite', variable)
+        Axios.post('/api/favorite/removeFavorite', variables)
         .then(response=> {
             if(response.data.success) {
                 localStorage.getItem('creds')
@@ -53,13 +46,9 @@ function FavoritePage() {
                 alert(' Failed to remove from favorite')
             }
         })
-
     }
 
-
     const renderTableBody = FavoritedMovies.map((movie, index) => {
-
-
         const content = (
             <div>
                 {movie.moviePost ? 

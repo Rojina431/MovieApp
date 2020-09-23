@@ -31,7 +31,7 @@ favoriteRouter.route('/favorited')
             if (err) return res.status(400).send(err)
 
             //How can we know if I already favorite this movie or not ? 
-            let result = false;
+            var result=false;
             if (favorite.length !== 0) {
                 result = true
             }
@@ -71,7 +71,7 @@ favoriteRouter.route('/removeFavorite')
 favoriteRouter.route('/getFavoritedMovie')
 .post(  (req, res) => {
 
-    Favorite.find()
+    Favorite.find({ userFrom: req.body.userFrom })
     .exec((err, favorites) => {
         if (err) return res.status(400).json({ success: false, err })
         res.status(200).json({ success: true, favorites })

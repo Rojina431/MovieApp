@@ -42,12 +42,10 @@ function LandingPage() {
             setCurrentPage(jsonResponse.page)
             }
         })
-        
     }
 
     return (
         <div style={{ width: '100%', margin: 0 }}  >
-
         {/*Search Component*/}
              <div>
                  <Search search={search}/>
