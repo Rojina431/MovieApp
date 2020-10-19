@@ -1,10 +1,13 @@
 import React, { useState ,useEffect} from 'react';
-import {Button} from 'reactstrap';
+import {Button,CardBody} from 'reactstrap';
 import {API_KEY,API_URL,IMG_URL} from '../../config/api';
 import {Table,Row } from 'reactstrap';
 import MainImage from './mainImage';
 import GridImage from './cardImage'
 import Favorite from './favorite.js';
+import {useHistory} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 //import {connect} from 'react-redux'
 
 
@@ -14,7 +17,7 @@ import Favorite from './favorite.js';
     const [Movie,setMovie]=useState([]);
     const [Crews,setCrews]=useState([]);
     const [ActorToggle,setActorToggle]=useState(false)
-
+    let history=useHistory();
     useEffect(() => {
         const endpoint = `${API_URL}movie/${props.movieId}?api_key=${API_KEY}&language=en-US`
         fetchMovies(endpoint)
@@ -37,7 +40,9 @@ import Favorite from './favorite.js';
             
         })
     }
-    
+const onClick=()=>{
+    history.push('/');
+}    
 
   const handleClick=()=>{
       setActorToggle(!ActorToggle)
@@ -55,14 +60,17 @@ import Favorite from './favorite.js';
         }
         </div>
         <br/>
-
-    <div style={{ display: 'flex', justifyContent: 'flex-end' }} className="mb-2">
-           <Favorite userFrom={JSON.parse(localStorage.getItem('creds'))} movieId={props.movieId} movieInfo={Movie} />
-    </div>
-
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }} className="mr-2">
+           <Favorite userFrom={JSON.parse(localStorage.getItem('creds'))} movieId={props.movieId} movieInfo={Movie} /> 
+       </div>
+        <div className="ml-3">
+           <Button onClick={onClick}><span><FontAwesomeIcon icon={faArrowLeft}/></span>Go Back</Button> 
+        </div>
+       
         {/*Movie info */}
         {Movie &&
-            <Table className="mx-1" bordered>
+        <CardBody> 
+            <Table className="mx-1" style={{backgroundColor:'lightgrey'}} bordered>
             <tr className="text-center">
               <th colSpan={8}>Movie Info</th>
             </tr>
@@ -87,6 +95,7 @@ import Favorite from './favorite.js';
              <td>{Movie.revenue}</td>
             </tr>
             </Table>
+            </CardBody> 
         }
 
     <div style={{ display: 'flex', justifyContent: 'center' }}>

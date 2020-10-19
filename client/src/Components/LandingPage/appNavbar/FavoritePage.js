@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios';
 import { Popover } from 'antd';
 import { IMG_URL } from '../../../config/api';
-import {Table} from 'reactstrap';
-
+import {Table,Button} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import {useHistory} from 'react-router-dom';
 
 function FavoritePage() {
-
+    let history=useHistory();
     const variable = { 
          userFrom:JSON.parse(localStorage.getItem('creds')) 
     }
@@ -47,6 +49,9 @@ function FavoritePage() {
             }
         })
     }
+    const onClick=()=>{
+        history.push('/');
+    } 
 
     const renderTableBody = FavoritedMovies.map((movie, index) => {
         const content = (
@@ -93,6 +98,9 @@ function FavoritePage() {
 
                 </tbody>
             </Table>
+            <div>
+            <Button onClick={onClick}><span><FontAwesomeIcon icon={faArrowLeft}/></span>Go Back</Button>
+            </div>
         </div>
     )
 }

@@ -86,7 +86,7 @@ function Favorite(props) {
 
     return (
             <Button onClick={onClickFavorite} > {!Favorited ? "Add to Favorite" : "Remove from Favorite"} {FavoriteNumber}</Button>
-    )
+            )
 }
 
 const mapStateToProps=state=>({
