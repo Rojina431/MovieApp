@@ -41,6 +41,8 @@ function LandingPage() {
             setMovies(jsonResponse.results)
             setCurrentPage(jsonResponse.page)
             }
+        }).catch((e)=>{
+        return <div className="mt-4 pt-1"style={{textAlign:'center'}}>{`Error ${e} occured`}</div>
         })
     }
 
@@ -59,7 +61,7 @@ function LandingPage() {
 
             {/* Body  */}
             <div style={{ width: '85%', margin: '1rem auto' }}>
-                <h1> Movies by latest</h1>
+            {Movies[0]&&<h1> Movies by latest</h1>}
                 <hr />
 
                 {/* Grid Cards */}
@@ -79,9 +81,12 @@ function LandingPage() {
 
                 {/* Load More Button  */}
                 <br />
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                {Movies[0]&& <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button onClick={handleClick}> Load More </Button>
-                </div>
+                </div>}
+
+                {!Movies[0]&&
+                <div className="mt-4 pt-1"style={{textAlign:'center'}}><h2>Movie not found!</h2></div>}
 
             </div>
 

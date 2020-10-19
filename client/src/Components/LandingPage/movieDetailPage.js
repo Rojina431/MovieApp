@@ -8,8 +8,6 @@ import Favorite from './favorite.js';
 import {useHistory} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
-//import {connect} from 'react-redux'
-
 
 
  function MovieDetail(props){
